@@ -105,3 +105,24 @@
   width: 100vw;
   height: auto;
 }
+.comment-submit {
+  display: flex;
+
+  textarea {
+    flex: 1;
+    background: RGBA(255, 255, 255, 0.1);
+    resize: none;
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+    border-radius: 0;
+    &:focus {
+      background: RGBA(255, 255, 255, 0.2);
+    }
+  }
+  button {
+    flex: 0 0 50px;
+    border-radius: 0;
+    font-size: 1.25rem;
+  }
+}
