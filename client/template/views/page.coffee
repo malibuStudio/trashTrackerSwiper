@@ -159,8 +159,17 @@ Template.page.onRendered ->
     if @$('.swiper-container .swiper-slide').length > 0
       mySwiper = @$('.swiper-container').swiper(swiperOptions)
       setInterval mySwiper.reInit, 800
+
+      # Slide Scroll Vertical Effect
+      $('.swiper-slide').on('scroll', ->
+        scrollPos = $('.swiper-slide-active').scrollTop()
+        scrollSpeed = parseInt($('.swiper-slide-active .page-comments').data('scroll-speed'))
+        elPos = scrollPos / scrollSpeed
+        $('.swiper-slide-active .page-comments').css('transform', 'translateY(-' + elPos + 'px)')
+      )
     else
       setTimeout initSwiper, 100
+
 
   initSwiper()
 
