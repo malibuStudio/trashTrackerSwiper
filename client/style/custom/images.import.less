@@ -1,0 +1,19 @@
+.img-wrapper {
+  position: relative;
+  width: 100vmin;
+  height: 100vmin;
+
+  margin-top: ~"calc(50vh - 50vmin)";
+
+
+  overflow: hidden;
+
+  user-select: none;
+  img {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    .translate(-50%, -50%);
+  }
+}

@@ -1,0 +1,22 @@
+template(name="page")
+    +HammerTouchArea(gestureMap=gestures)
+    .swiper-container
+      // UI Components (Menu)
+      .page-ui-components#ui-wrapper
+        #upload-photo
+          if currentUser
+            input(type="file")
+          button.btn Upload
+
+      .swiper-wrapper
+        +each Trashes
+          .swiper-slide
+            //- .page-inner
+            .page-main
+              .img-wrapper
+                img(src="{{imageUrl}}")
+            .page-comments
+              h1  this is comment
+              h1  this is comment
+              h1  this is comment
+              h1  this is comment
