@@ -20,7 +20,5 @@ template(name="page")
                 textarea(rows="3")
                 //- button.btn-primary.btn-comment-submit
                   i.icon.plus
-              h1  this is comment
-              h1  this is comment
-              h1  this is comment
-              h1  this is comment
+              +each comments
+                h1  {{description}}

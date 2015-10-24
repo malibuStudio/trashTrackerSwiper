@@ -43,6 +43,11 @@
   "comments":
     type: [Object]
     optional: true
+  "comments.$._id":
+    type: String
+    autoValue: ->
+      if @isUpdate and not @value
+        Random.id()
   "comments.$.description":
     type: String
     max: 200
