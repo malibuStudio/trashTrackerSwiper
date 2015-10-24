@@ -43,6 +43,10 @@ template(name="page")
                 i.ion-chatboxes
               a(href="" data-action="show-map" data-target="{{_id}}")
                 i.ion-map
+              if lgtm
+                a(href="" style="pointer-events:none;")
+                  i.ion-ribbon-b
+                  | {{lgtm}}
             .contents
               span.description {{description}}
 
