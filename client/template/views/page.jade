@@ -19,7 +19,7 @@ template(name="page")
       button.btn.btn-primary
         i.icon.add
 
-  .page-container
+  .page-container.scrollable
     //- Each Posts (Trashes)
     +each Trashes
       .page-item
@@ -80,7 +80,7 @@ template(name="page")
                 | {{createdUserName}}
                 span {{moFromNow createdAt withoutSuffix}}
               if imageUrl
-                a.comment-lgtm(href="#" class="{{checkedClass}}")
+                .comment-lgtm(class="{{checkedClass}}")
                   i.ion-ribbon-b
                   span {{lgtm}}
             if description
