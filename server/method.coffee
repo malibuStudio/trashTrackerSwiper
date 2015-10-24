@@ -64,3 +64,5 @@ Meteor.methods
       true # success
     else
       false # fail
+  'log': (obj)->
+    console.log obj
