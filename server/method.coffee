@@ -28,7 +28,6 @@ Meteor.methods
       "geometry":
         "type": "Point"
         "coordinates": [obj.geo.coords.longitude, obj.geo.coords.latitude]
-        "coordinates": [126.5300577, 33.5001804]
         "timestamp": obj.geo.timestamp or +new Date()
     ,
       validate: false
