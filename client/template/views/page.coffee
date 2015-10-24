@@ -12,6 +12,12 @@ Template.page.onCreated ->
   @comments = new Mongo.Collection null
 
 Template.page.helpers
+  "checkedClass": ->
+    userId = Meteor.userId()
+    if userId and @lgtmUsers and userId in @lgtmUsers
+      return 'voted'
+    else
+      return 'vote'
   "Trashes": ->
     # t = Template.instance()
     # idx = t.pageIndex.get()
@@ -38,7 +44,6 @@ Template.page.helpers
       e.preventDefault()
       # tmpl.view.template.swipeH 1, tmpl
 
-
 Template.page.events
   # ========================================================
   # Comments
@@ -61,6 +66,34 @@ Template.page.events
         ease: Power4.easeOut
         onComplete: ->
           document.querySelector('.page-comments').classList.add 'view-comments'
+
+  # ========================================================
+  # Comments
+  # -> LGTM
+  # ========================================================
+  'touchend .vote': (e)->
+    e.preventDefault()
+    e.stopImmediatePropagation()
+
+    obj =
+      trashId: Session.get('commentParentId')
+      commentId: @_id
+
+    Meteor.call "checkLGTM", obj
+    return false
+
+  'touchend .voted': (e)->
+    e.preventDefault()
+    e.stopImmediatePropagation()
+
+    obj =
+      trashId: Session.get('commentParentId')
+      commentId: @_id
+
+    Meteor.call "uncheckLGTM", obj
+    return false
+
+
   # ========================================================
   # Comments
   # -> Upload Text Comment
@@ -273,4 +306,6 @@ Template.page.events
 
 Template.page.onRendered ->
   $('.bottom-bar textarea').autosize()
+
+
 

@@ -1,6 +1,7 @@
 #viewport {
   position: relative;
-  background: whitel;
+  background: white;
+  -webkit-touch-background: none;
 }
 
 .app-header {
@@ -210,19 +211,34 @@
         }
       }
       .desc {
-
+        margin-top: 0.25rem;
       }
       .group {
         flex: 1;
+        .inner {
+          display: flex;
+          justify-content: space-between;
+        }
       }
       .comment-img {
         position: relative;
         width: 50vmin;
         height: 50vmin;
-        margin-top: 0.5rem;
+        margin-top: -0.25rem;
         img {
           width: 100%;
           height: 100%;
+        }
+      }
+      a.comment-lgtm {
+        text-decoration: none;
+        font-size: 1.5rem;
+        color: RGBA(0, 0, 0, 0.3);
+        * {
+          display: inline-block;
+        }
+        &.voted {
+          color: @brand-primary !important;
         }
       }
     }

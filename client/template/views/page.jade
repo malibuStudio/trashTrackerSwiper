@@ -39,12 +39,12 @@ template(name="page")
           .body-inner
             //- Action Bar
             .list-actions
-              a(href="" data-action="show-comment" data-target="{{_id}}")
+              a(href="#" data-action="show-comment" data-target="{{_id}}")
                 i.ion-chatboxes
-              a(href="" data-action="show-map" data-target="{{_id}}")
+              a(href="#" data-action="show-map" data-target="{{_id}}")
                 i.ion-map
               if lgtm
-                a(href="" style="pointer-events:none;")
+                a(href="#" style="pointer-events:none;")
                   i.ion-ribbon-b
                   | {{lgtm}}
             .contents
@@ -75,15 +75,23 @@ template(name="page")
         li
           .profile
           .group
-            .username
-              | {{createdUserName}}
-              span {{moFromNow createdAt withoutSuffix}}
+            .inner
+              .username
+                | {{createdUserName}}
+                span {{moFromNow createdAt withoutSuffix}}
+              if imageUrl
+                a.comment-lgtm(href="#" class="{{checkedClass}}")
+                  i.ion-ribbon-b
+                  span {{lgtm}}
             if description
               .desc
                 | {{description}}
             if imageUrl
               .comment-img
                 img(src="{{imageUrl}}")
+
+
+
 
     .bottom-bar
       textarea.comment-text
