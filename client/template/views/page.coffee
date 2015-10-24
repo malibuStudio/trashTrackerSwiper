@@ -194,49 +194,16 @@ Template.page.events
   # Events
   # -> Layout Control
   # ========================================================
-  'touchstart .swiper-container': (e)->
-    firstTouch = e.originalEvent.touches[0]
+  'touchend [data-action=show-map]': (e, t)->
+    e.preventDefault()
+    target = "#dm-#{@_id}"
+    $(target).css('opacity', 1)
 
-    Template.instance().touchstart =
-      x: firstTouch.pageX
-      y: firstTouch.pageY
 
-  'touchend .swiper-container': (e)->
-    lastTouch = e.originalEvent.changedTouches[e.originalEvent.changedTouches.length-1]
-
-    touchend =
-      x: lastTouch.pageX
-      y: lastTouch.pageY
-
-    touchstart = Template.instance().touchstart
-
-    uiWrapper = document.getElementById('ui-wrapper')
-
-    # # Show touchstart and touchend obj (x, y)
-    # console.log 'touchstart', touchstart
-    # console.log 'touchend', touchend
-
-    if _.isEqual(touchstart, touchend)
-      console.log 'tap not move'
-      if 'active' in uiWrapper.classList
-        console.log 'menu visible'
-        TweenMax.to uiWrapper, 0.5,
-          opacity: 0
-          onComplete: ->
-            uiWrapper.classList.remove 'active'
-            uiWrapper.style.pointerEvents = 'none'
-      else
-        console.log 'menu hidden'
-        TweenMax.to uiWrapper, 0.5,
-          opacity: 1
-          onComplete: ->
-            uiWrapper.classList.add 'active'
-            uiWrapper.style.pointerEvents = 'auto'
-
-# ========================================================
-# Events
-# -> Upload Photo
-# ========================================================
+  # ========================================================
+  # Events
+  # -> Upload Photo
+  # ========================================================
   'touchend #upload-photo': (e)->
     if not Meteor.userId()
       console.log 'Sign in required'
