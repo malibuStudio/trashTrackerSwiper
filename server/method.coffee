@@ -20,5 +20,11 @@ Meteor.methods
       $addToSet:
         comments: object
     , validate: false
-
-
+  'checkLGTM': (obj)->
+    Trashes.update
+      _id: obj.parentId
+      "comments._id": obj.commentId
+    , $inc:
+        "comments.$.lgtm": 1
+        "lgtm": 1
+    , validate: false
