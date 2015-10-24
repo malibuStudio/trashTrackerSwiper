@@ -4,4 +4,6 @@ template(name="map")
     .map-list
       ul
         +each trashes
-          li {{properties.name}}
+          li
+            i.icon.marker
+            span {{properties.name}}
