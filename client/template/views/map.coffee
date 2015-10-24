@@ -50,6 +50,7 @@ Template.map.onRendered ->
 Template.map.helpers
   'trashes': (e, tmpl)->
     t = Template.instance()
+    maxDensity = 0
     # go reactive
     trashes = Trashes.find().map (v)-> v.geometry.coordinates
     unless trashes.length
@@ -65,11 +66,13 @@ Template.map.helpers
           'coordinates': feature.geometry.coordinates )
           density++
       feature.properties.density = density
+      maxDensity = maxDensity < density and density or maxDensity
       console.log 'density', density
 #    console.log 'trashes found'
 #    console.log jejuMap.features
 
     console.log 'map rendered'
+    console.log 'maxDensity', maxDensity
     @map = L.map('map',
       minZoom: 9
       maxZoom: 9
@@ -84,11 +87,15 @@ Template.map.helpers
     ], 9
 
     getColor = (d)->
-      d > 4 and '#800026' or
-        d > 3 and '#BD0026' or
-        d > 2 and '#E31A1C' or
-        d > 1 and '#FC4E2A' or
-        '#FFEDA0'
+      d = d / maxDensity * 8
+      d > 7 and '#800026' or
+      d > 6 and '#BD0026' or
+      d > 5 and '#E31A1C' or
+      d > 4 and '#FC4E2A' or
+      d > 3 and '#FD8D3C' or
+      d > 2 and '#FEB24C' or
+      d > 1 and '#FED976' or
+      '#FFEDA0'
 
     style = (feature)->
       console.log 'getColor', getColor feature.properties.density
