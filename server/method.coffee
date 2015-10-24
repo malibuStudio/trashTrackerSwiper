@@ -8,14 +8,8 @@ Meteor.methods
       "geometry":
         "type": "Point"
         "coordinates": [obj.geo.coords.longitude, obj.geo.coords.latitude]
-<<<<<<< HEAD
-        "timestamp": obj.geo.timestamp
-    , validate: false
-=======
         "timestamp": obj.geo.timestamp or +new Date()
-    ,
-      validate: false
->>>>>>> afce4fc42b2b6fc7d1d117bfb45ba72f3f77ddd1
+    , validate: false
 
   'addComment': (comment)->
     object = {}
@@ -25,10 +19,6 @@ Meteor.methods
     Trashes.update comment.parentId,
       $addToSet:
         comments: object
-<<<<<<< HEAD
     , validate: false
-=======
-    ,
-      validate: false
->>>>>>> afce4fc42b2b6fc7d1d117bfb45ba72f3f77ddd1
+
 
