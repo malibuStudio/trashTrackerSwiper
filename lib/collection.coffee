@@ -71,6 +71,10 @@
     autoValue: (doc)->
       # needs better practice
       Meteor.users.findOne(doc.comments and doc.comments[0].createdUserId or @userId).username
+  "comments.$.createdAt":
+    type: Date
+    autoValue: ->
+      @value and @value or new Date
 
 
 Trashes.attachSchema Schemas.Trashes
