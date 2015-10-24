@@ -1,4 +1,11 @@
 @setFixture = ->
+  Meteor.users.remove {}
+  userId = Accounts.createUser
+    username: 'admin'
+    email: 'cleanjeju@malibu-apps.com'
+    password: '1234qwer'
+
+  console.log "admin created", userId
   fixtures = [
     description: "1쓰레기 돌 샌드위치"
     imageUrl: "http://placehold.jp/3d4070/ffffff/300x300.png?text=1"
@@ -7,6 +14,10 @@
       type: "Point"
       coordinates: [ 126.7592, 33.5585 ]
       timestamp: 1445613400511
+    comments: [
+      description: "1st comment"
+      createdUserId: userId
+    ]
   ,
     description: "2모래 은닉자"
     imageUrl: "http://placehold.jp/3d4070/ffffff/300x300.png?text=2"
@@ -32,4 +43,4 @@
       coordinates: [ 126.5297, 33.5063 ]
       timestamp: 1445643430511
   ]
-  Trashes.insert _.extend fixture, createdAt: new Date(fixture.geometry.timestamp) for fixture in fixtures
+  Trashes.insert (_.extend fixture, createdAt: new Date(fixture.geometry.timestamp), createdUserId: userId), validate: false for fixture in fixtures

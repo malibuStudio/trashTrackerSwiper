@@ -28,19 +28,19 @@
     type: Date
     denyUpdate: true
     autoValue: ->
-      if @isInsert?
+      if @isInsert
         new Date
   "createdUserId":
     type: String
     denyUpdate: true
     autoValue: ->
-      if @isInsert and not @value
-        @userId
+      if @isInsert
+        @value and @value or @userId
   "createdUserName":
     type: String
-    autoValue: ->
-      if @isInsert and not @value
-        Meteor.users.findOne(@userId).username
+    autoValue: (doc)->
+      if @isInsert
+        Meteor.users.findOne(doc and doc.createdUserId or @userId).username
     denyUpdate: true
   # comments array
   "comments":
@@ -63,13 +63,13 @@
     optional: true
   "comments.$.createdUserId":
     type: String
-    denyUpdate: true
     autoValue: ->
-      if @isInsert and not @value
-        @userId
+      @value and @value or @userId
   "comments.$.createdUserName":
     type: String
-    autoValue: ->
-      if @isInsert and not @value
-        Meteor.users.findOne(@userId).username
-    denyUpdate: true
+    autoValue: (doc)->
+      # needs better practice
+      Meteor.users.findOne(doc.comments and doc.comments[0].createdUserId or @userId).username
+
+
+Trashes.attachSchema Schemas.Trashes
