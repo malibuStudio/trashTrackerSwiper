@@ -4,6 +4,13 @@ $(window).resize( ->
   $mc = $("#map")
   $mc.css 'height', h- offsetTop
 ).resize()
+Template.map.onCreated ->
+  navigator.geolocation.getCurrentPosition (loc)=>
+    @locationSubs and @locationSubs.stop()
+    @locationSubs = @subscribe 'getTrashLocations', [
+      loc.coords.longitude,
+      loc.coords.latitude
+    ]
 
 Template.map.origin =
   longitude: 126.54
@@ -26,3 +33,7 @@ Template.map.onRendered ->
   L.geoJson(jejuMap).addTo(@map)
 , (error)->
   console.log "faile to get location", error
+
+Template.map.helpers
+  'trashes': ->
+    features for features in jejuMap.features
