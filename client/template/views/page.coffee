@@ -110,7 +110,7 @@ Template.page.events
           console.log ':( ', err.reason
         else
           console.log 'Yay!'
-          $('textarea.comment-text').val('')
+          $('textarea.comment-text').val('').trigger('autosize').autosize()
     else
       console.log 'Sign in required'
       MODAL('modal-account')
@@ -322,6 +322,7 @@ Template.page.events
 
     TweenMax.to '.map-container', 0.5,
       opacity: 0
+      # clearProps: 'all'
       onComplete: ->
         $('.map-container').css
           'pointer-events': 'none'
@@ -329,6 +330,14 @@ Template.page.events
 
 Template.page.onRendered ->
   $('.bottom-bar textarea').autosize()
+
+  $('textarea').on('keydown', (e)->
+    keycode = e.keyCode or e.which
+
+    if keycode is 13
+      e.preventDefault()
+      return false
+  )
 
 
 
