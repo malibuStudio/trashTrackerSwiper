@@ -2,9 +2,9 @@
   background: black;
 }
 
-// .swiper-wrapper
+// .page-wrapper
 // Hoziontal Wrapper
-.swiper-container {
+.page-container {
   position: relative;
 
   width: 100vw;
@@ -13,8 +13,8 @@
   overflow: hidden;
 }
 
-// .swiper-ui-components
-// Wrap each swiper to viewport and enable scroll
+// .page-ui-components
+// Wrap each page to viewport and enable scroll
 .page-ui-components {
   position: absolute;
   top: 0;
@@ -33,56 +33,20 @@
   }
 }
 
-// .swiper-wrapper
-// Wrap each swiper to viewport and enable vertical scroll
-.swiper-wrapper {
-  // position: absolute;
-  // top: 0;
-  // left: 0;
-  // // left: -100vw;
+// .page-wrapper
+// Wrap each page to viewport and enable vertical scroll
+.page-wrapper {
 
-  // .translate(-100vw, 0);
-
-  // width: 300vw;
-  // height: 100vh;
-
-  // white-space: nowrap;
-  // display: flex;
-  // .swiper-slide {
-  //   position: absolute;
-  //   top: 0;
-
-  //   width: 100vw;
-  //   height: 100vh;
-
-  //   overflow-y: scroll;
-
-  //   background: black;
-  //   opacity: 1;
-
-  //   z-index: 99;
-  //   &:nth-child(1) {
-  //     left: 0;
-  //     background: red;
-  //   }
-  //   &:nth-child(2) {
-  //     left: 100vw;
-  //     background: darken(red, 10%);
-  //   }
-  //   &:nth-child(3) {
-  //     left: 200vw;
-  //     background: darken(red, 20%);
-  //   }
-  // }
 }
 
 
-.swiper-slide {
+.page-item {
+  position
   overflow-y: scroll;
 }
 
-// .swiper-wrapper
-// First main swiper
+// .page-wrapper
+// First main page
 .page-main {
   position: absolute;
   top: 0;
@@ -93,36 +57,36 @@
   overflow-y: scroll;
 }
 
-// .swiper-comments
-// Comments
-.page-comments {
-  position: absolute;
-  top: 100vh;
-  left: 0;
+// // .page-comments
+// // Comments
+// .page-comments {
+//   position: absolute;
+//   top: 100vh;
+//   left: 0;
 
-  color: white;
+//   color: white;
 
-  width: 100vw;
-  height: auto;
-}
-.comment-submit {
-  display: flex;
+//   width: 100vw;
+//   height: auto;
+// }
+// .comment-submit {
+//   display: flex;
 
-  textarea {
-    flex: 1;
-    background: RGBA(255, 255, 255, 0.1);
-    resize: none;
-    border: 0;
-    outline: 0;
-    box-shadow: none;
-    border-radius: 0;
-    &:focus {
-      background: RGBA(255, 255, 255, 0.2);
-    }
-  }
-  button {
-    flex: 0 0 50px;
-    border-radius: 0;
-    font-size: 1.25rem;
-  }
-}
+//   textarea {
+//     flex: 1;
+//     background: RGBA(255, 255, 255, 0.1);
+//     resize: none;
+//     border: 0;
+//     outline: 0;
+//     box-shadow: none;
+//     border-radius: 0;
+//     &:focus {
+//       background: RGBA(255, 255, 255, 0.2);
+//     }
+//   }
+//   button {
+//     flex: 0 0 50px;
+//     border-radius: 0;
+//     font-size: 1.25rem;
+//   }
+// }

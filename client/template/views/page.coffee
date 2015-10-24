@@ -14,11 +14,12 @@ Template.page.helpers
   "Trashes": ->
     # t = Template.instance()
     # idx = t.pageIndex.get()
+    # debugger
     Trashes.find {},
       # skip: idx - 1
       # limit: idx > 0 and 3 or 2
-      sort:
-        createdAt: -1
+      # sort:
+        # createdAt: -1
   "gestures":
     'swiperight .page-container': (e, tmpl)->
       e.preventDefault()
@@ -33,7 +34,7 @@ Template.page.events
   # Events
   # -> Layout Control
   # ========================================================
-  'touchstart .page-container': (e)->
+  'touchstart .swiper-container': (e)->
     firstTouch = e.originalEvent.touches[0]
 
     Template.instance().touchstart =
@@ -41,7 +42,7 @@ Template.page.events
       y: firstTouch.pageY
 
 # console.log Template.instance().touchstart
-  'touchend .page-container': (e)->
+  'touchend .swiper-container': (e)->
     lastTouch = e.originalEvent.changedTouches[e.originalEvent.changedTouches.length-1]
 
     touchend =
@@ -158,7 +159,10 @@ Template.page.onRendered ->
   initSwiper = =>
     if @$('.swiper-container .swiper-slide').length > 0
       mySwiper = @$('.swiper-container').swiper(swiperOptions)
-      setInterval mySwiper.reInit, 800
+      Meteor.setInterval (->
+        mySwiper.reInit
+        console.log 'Swiper Reinit'
+      ), 800
 
       # Slide Scroll Vertical Effect
       # Irrelevant to swiper
@@ -169,7 +173,7 @@ Template.page.onRendered ->
       #   $('.swiper-slide-active .page-comments').css('transform', 'translateY(-' + elPos + 'px)')
       # )
     else
-      setTimeout initSwiper, 100
+      Meteor.setTimeout initSwiper, 100
 
 
   initSwiper()

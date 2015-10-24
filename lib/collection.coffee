@@ -19,6 +19,9 @@
   "imageUrl":
     type: String
     label: "imageUrl"
+  "publicId":
+    type: String
+    label: "publicId"
   "geometry":
     type: Schemas.Coordinate
   "createdAt":

@@ -1,16 +1,16 @@
 template(name="page")
-    +HammerTouchArea(gestureMap=gestures)
-    .swiper-container
+    //- +HammerTouchArea(gestureMap=gestures)
+    .page-container
       // UI Components (Menu)
       .page-ui-components#ui-wrapper
         #upload-photo
           if currentUser
             input(type="file")
-          button.btn Upload
+          button.btn.btn-primary 쓰레기 제보하기
 
-      .swiper-wrapper
+      .page-wrapper
         +each Trashes
-          .swiper-slide
+          .page-item
             //- .page-inner
             .page-main
               .img-wrapper

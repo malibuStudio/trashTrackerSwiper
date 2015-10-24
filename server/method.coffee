@@ -1,5 +1,5 @@
 Meteor.methods
-  'insertAnyLocation': (loc)->
+  'insertAnyLocation': (obj)->
     ## Test location
     # navigator.geolocation.getCurrentPosition(function(result) {
     #   console.log(result.coords.longitude);
@@ -13,8 +13,18 @@ Meteor.methods
     # }, function(result) { console.log("error", result) });
     Trashes.insert
       "description": "테스트 위치 Insert"
-      "imageUrl": "http://news.kbs.co.kr/data/news/2013/06/28/2682274_250.jpg"
+      "imageUrl": obj.url
+      "pulicId": obj.publicId
       "geometry":
         "type": "Point"
-        "coordinates": [loc.coords.longitude, loc.coords.latitude]
-        "timestamp": +new Date()
+        "coordinates": [obj.geo.coords.longitude, obj.geo.coords.latitude]
+        "timestamp": obj.geo.timestamp
+  'addTrash': (obj)->
+    Trashes.insert
+      "description": obj.description or "Test 위치 insert"
+      "imageUrl": obj.url
+      "publicId": obj.publicId
+      "geometry":
+        "type": "Point"
+        "coordinates": [obj.geo.coords.longitude, obj.geo.coords.latitude]
+        "timestamp": obj.geo.timestamp
