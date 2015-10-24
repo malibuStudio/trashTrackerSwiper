@@ -86,9 +86,9 @@ template(name="page")
       button.comment-submit
         i.icon.add
 
-
-      button.comment-photo
-        input#upload-comment-photo(type="file")
-        i.icon.camera
+      if currentUser
+        button.comment-photo
+          input#upload-comment-photo(type="file")
+          i.icon.camera
 
 

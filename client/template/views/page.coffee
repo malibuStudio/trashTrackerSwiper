@@ -61,20 +61,31 @@ Template.page.events
         ease: Power4.easeOut
         onComplete: ->
           document.querySelector('.page-comments').classList.add 'view-comments'
+  # ========================================================
+  # Comments
+  # -> Upload Text Comment
+  # ========================================================
   'touchend .bottom-bar button.comment-submit': (e)->
     e.preventDefault()
+    if Meteor.userId()
+      obj =
+        parentId: Session.get('commentParentId')
+        description: $.trim($('textarea.comment-text').val())
 
-    obj =
-      parentId: Session.get('commentParentId')
-      description: $.trim($('textarea.comment-text').val())
+      Meteor.call 'addComment', obj, (err, res)->
+        if err
+          console.log ':( ', err.reason
+        else
+          console.log 'Yay!'
+          $('textarea.comment-text').val('')
+    else
+      console.log 'Sign in required'
+      MODAL('modal-account')
 
-    Meteor.call 'addComment', obj, (err, res)->
-      if err
-        console.log ':( ', err.reason
-      else
-        console.log 'Yay!'
-        $('textarea.comment-text').val('')
-
+  # ========================================================
+  # Comments
+  # -> Upload Comment Photo
+  # ========================================================
   'change #upload-comment-photo': (e)->
     Session.set('commentPhotoUpload', true)
     e = e.originalEvent
@@ -152,7 +163,6 @@ Template.page.events
       x: firstTouch.pageX
       y: firstTouch.pageY
 
-# console.log Template.instance().touchstart
   'touchend .swiper-container': (e)->
     lastTouch = e.originalEvent.changedTouches[e.originalEvent.changedTouches.length-1]
 
@@ -192,7 +202,6 @@ Template.page.events
   'touchend #upload-photo': (e)->
     if not Meteor.userId()
       console.log 'Sign in required'
-
       MODAL('modal-account')
 
   'change #upload-photo input': (e)->
