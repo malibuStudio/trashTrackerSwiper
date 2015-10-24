@@ -19,37 +19,46 @@ Template.splash.events
     TweenMax.fromTo img, 1.3,
       opacity: 0
       left: placement.left
-      # top: placement.top
       top: ~~(Math.random() * 10)
       scale: 1
       rotation: 360
     ,
       opacity: 1
       left: placement.left
-      # left: '50%'
-      # top: '50%'
       top: '100%'
       scale: 1
       ease: Bounce.easeOut
       rotation: placement.rotate
-      # clearProps: 'all'
 
 
 
+Template.splash.onRendered ->
+  TweenMax.from '.stripe', 1.2,
+    opacity: 0
+    y: '22%'
+  TweenMax.from 'img.logo', 1,
+    opacity: 0
+    y: '-100%'
+    ease: Bounce.easeOut
+  TweenMax.from 'img.halbe', 0.8,
+    opacity: 0
+    y: '30%'
+    delay: 0.4
+    ease: Power3.easeOut
 
-    # TweenMax.fromTo '.bullet', 0.8,
-    #   opacity: 0
-    #   left: placement.left
-    #   top: placement.top
-    #   scale: 4
-    #   rotation: 360
-    # ,
-    #   opacity: 1
-    #   left: '50%'
-    #   top: '50%'
-    #   scale: 1
-    #   ease: Power1.easeOut
-    #   rotation: -720
-    #   clearProps: 'all'
-
-
+  Meteor.setTimeout (->
+    TweenMax.to '.stripe', 0.2,
+      scale: 1.5
+      opacity: 0
+    TweenMax.to 'img.logo', 0.2,
+      scale: 1.5
+      opacity: 0
+    TweenMax.to 'img.halbe', 0.2,
+      scale: 1.5
+      opacity: 0
+    TweenMax.to '.splash-container', 0.2,
+      opacity: 0
+      delay: 0.15
+      onComplete: ->
+        $('.splash-container').remove()
+  ), 3500
