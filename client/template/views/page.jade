@@ -80,7 +80,7 @@ template(name="page")
                 | {{createdUserName}}
                 span {{moFromNow createdAt withoutSuffix}}
               if imageUrl
-                a.comment-lgtm(href="#" class="{{checkedClass}}")
+                .comment-lgtm(class="{{checkedClass}}")
                   i.ion-ribbon-b
                   span {{lgtm}}
             if description

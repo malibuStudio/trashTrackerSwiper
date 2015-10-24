@@ -10,6 +10,8 @@ Template.upload.events
         $('.upload-container').css('display', 'none')
         $('img.crop-target').cropper('destroy')
         Session.set('commentPhotoUpload', false)
+        Session.set('croppedImg')
+        Session.set('currentImg')
 
 
 
@@ -31,6 +33,8 @@ Template.upload.events
         console.log err
         $('.btn-upload-cropped').removeClass('loading')
       else
+        Session.set('croppedImg')
+        Session.set('currentImg')
         console.log 'Cloudinary Complete: ', res
 
         geoloc = Geolocation.currentLocation()
@@ -66,6 +70,8 @@ Template.upload.events
                 clearProps: 'all'
                 onComplete: ->
                   $('.upload-container').css('display', 'none');
+                  # Session.set('croppedImg')
+                  # Session.set('currentImg')
 
         else
           Meteor.call 'addTrash', obj, (err, res)->
@@ -81,4 +87,6 @@ Template.upload.events
                 clearProps: 'all'
                 onComplete: ->
                   $('.upload-container').css('display', 'none');
+                  # Session.set('croppedImg')
+                  # Session.set('currentImg')
 

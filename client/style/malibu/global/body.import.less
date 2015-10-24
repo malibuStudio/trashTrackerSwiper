@@ -27,3 +27,12 @@ html {
   -moz-box-sizing: inherit;
   box-sizing: inherit;
 }
+
+*:not(input),
+*:not(textarea) {
+  user-select: none;
+}
+input,
+textarea {
+  user-select: text;
+}

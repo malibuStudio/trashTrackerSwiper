@@ -33,6 +33,16 @@
     text-decoration: none;
     color: white;
   }
+  button {
+    &:focus {
+      background: @brand-primary;
+    }
+  }
+  input {
+    &:active, &:focus {
+      background: none;
+    }
+  }
 }
 
 // .page-wrapper
@@ -235,7 +245,7 @@
           height: 100%;
         }
       }
-      a.comment-lgtm {
+      .comment-lgtm {
         text-decoration: none;
         font-size: 1.5rem;
         color: RGBA(0, 0, 0, 0.3);
