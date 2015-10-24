@@ -1,5 +1,5 @@
 Template.page.onCreated ->
-  @pageIndex = new ReactiveVar 1
+#  @pageIndex = new ReactiveVar 1
   navigator.geolocation.getCurrentPosition (loc)=>
     @locationSubs and @locationSubs.stop()
     @locationSubs = @subscribe 'getTrashLocations', [
@@ -9,8 +9,7 @@ Template.page.onCreated ->
   @touchstart =
     x: 0
     y: 0
-
-
+  @comments = new Mongo.Collection null
 
 Template.page.helpers
   "Trashes": ->
@@ -18,14 +17,19 @@ Template.page.helpers
     # idx = t.pageIndex.get()
     # debugger
     Trashes.find {},
-      # skip: idx - 1
-      # limit: idx > 0 and 3 or 2
       sort:
         createdAt: -1
   "comments": ->
+    t = Template.instance()
     trashId = Session.get('commentParentId')
     if trashId?
-      Trashes.findOne(trashId).comments
+      t.comments.remove {}
+      trash = Trashes.findOne(trashId)
+      if trash and trash.comments
+        t.comments.insert comment for comment in trash.comments
+      t.comments.find {},
+        sort:
+          createdAt: -1
   "gestures":
     'swiperight .page-container': (e, tmpl)->
       e.preventDefault()
