@@ -20,7 +20,6 @@ Meteor.methods
         "timestamp": +new Date()
   'addComment': (comment)->
     object = {}
-    object._id = Random.id()
     object.description = comment.description if comment.description
     object.imageUrl = comment.imageUrl if comment.imageUrl
     object.geometry = comment.geometry if comment.geometry
