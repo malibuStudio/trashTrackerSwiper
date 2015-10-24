@@ -18,3 +18,10 @@ Meteor.methods
         "type": "Point"
         "coordinates": [loc.coords.longitude, loc.coords.latitude]
         "timestamp": +new Date()
+  'addComment': (comment)->
+    object = {}
+    object.description = comment.description if comment.description
+    object.imageUrl = comment.imageUrl if comment.imageUrl
+    object.geometry = comment.geometry if comment.geometry
+    Trashes.update comment.parentId(),
+      $addToSet: object
