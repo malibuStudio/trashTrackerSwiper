@@ -21,15 +21,17 @@ Meteor.methods
         "timestamp": obj.geo.timestamp
 
   'addTrash': (obj)->
-    console.log "addTrash", obj
     Trashes.insert
-      "description": obj.description
+      "description": obj.description or "쓰레기님이 탄생하셨습니다."
       "imageUrl": obj.url
       "publicId": obj.publicId
       "geometry":
         "type": "Point"
         "coordinates": [obj.geo.coords.longitude, obj.geo.coords.latitude]
-        "timestamp": obj.geo.timestamp
+        "coordinates": [126.5300577, 33.5001804]
+        "timestamp": obj.geo.timestamp or +new Date()
+    ,
+      validate: false
 
   'addComment': (comment)->
     object = {}
@@ -39,4 +41,6 @@ Meteor.methods
     Trashes.update comment.parentId,
       $addToSet:
         comments: object
+    ,
+      validate: false
 
