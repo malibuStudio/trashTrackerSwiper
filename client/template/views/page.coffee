@@ -101,9 +101,14 @@ Template.page.events
   'touchend .bottom-bar button.comment-submit': (e)->
     e.preventDefault()
     if Meteor.userId()
+      commentContent = $.trim($('textarea.comment-text').val())
+
+      if commentContent.length is 0
+        return false
+
       obj =
         parentId: Session.get('commentParentId')
-        description: $.trim($('textarea.comment-text').val())
+        description: commentContent
 
       Meteor.call 'addComment', obj, (err, res)->
         if err
