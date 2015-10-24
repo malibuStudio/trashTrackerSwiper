@@ -36,4 +36,17 @@ Template.map.onRendered ->
 
 Template.map.helpers
   'trashes': ->
+    # go reactive
+    trashes = Trashes.find().map (v)-> v.geometry.coordinates
+    for feature in jejuMap.features
+      density = 0
+      for trash in trashes
+        if GeoJSON.pointInPolygon({
+            'type': 'Point'
+            'coordinates': trash
+          },
+          'type': 'Polygon'
+          'coordinates': feature.geometry.coordinates )
+          density++
+      feature.properties.density = density
     features for features in jejuMap.features
