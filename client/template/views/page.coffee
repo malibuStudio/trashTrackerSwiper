@@ -1,5 +1,5 @@
 Template.page.onCreated ->
-  @pageIndex = new ReactiveVar 1
+#  @pageIndex = new ReactiveVar 1
   navigator.geolocation.getCurrentPosition (loc)=>
     @locationSubs and @locationSubs.stop()
     @locationSubs = @subscribe 'getTrashLocations', [
@@ -10,18 +10,16 @@ Template.page.onCreated ->
     x: 0
     y: 0
 
-
-
 Template.page.helpers
   "Trashes": ->
     # t = Template.instance()
     # idx = t.pageIndex.get()
     # debugger
     Trashes.find {},
+      sort:
+        createdAt: -1
       # skip: idx - 1
       # limit: idx > 0 and 3 or 2
-      # sort:
-        # createdAt: -1
   "comments": ->
     trashId = Session.get('commentParentId')
     if trashId?
