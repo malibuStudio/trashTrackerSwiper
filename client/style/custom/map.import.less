@@ -2,15 +2,13 @@
   // display: none;
 
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  top: -999999;
+  // right: 0;
+  // bottom: 0;
   left: 0;
 
-  // background: RGBA(255, 190, 0, 0.8);
-  // background: RGBA(0, 0, 0, 0.9);
-
-  background: lighten(RGBA(51, 136, 255, 1), 5 %);
+  width: 100vw;
+  height: 100vh;
 
   background: white;
   // pointer-events: none;
@@ -22,6 +20,16 @@
 
 .map-wrapper {
   position: relative;
+  .gradient {
+    position: absolute;
+    height: 30vh;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    pointer-events: none;
+
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(255, 255, 255, 0.75) 100%); /* Chrome10+,Safari5.1+ */
+  }
 }
 
 .leaflet-container {
@@ -45,9 +53,12 @@
 .map-list {
   overflow-y: scroll;
   height: 50vh;
+
+  box-shadow: 0px -2px 5px 0px RGBA(0, 0, 0, 0.05);
 }
 
 .map-list ul {
+
   background: #E3E4DD;
   background: white;
   overflow-y: scroll;
@@ -55,6 +66,8 @@
   margin: 0;
   padding: 0;
   padding: 0 1rem;
+  border-top: 1px solid #E3E4DD;
+
   // color: white;
   // padding: 2rem;
 
