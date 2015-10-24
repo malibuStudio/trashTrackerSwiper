@@ -105,4 +105,15 @@ template(name="page")
 
 
   .map-container
+    .app-header
+      //- Marker anchor for map
+      a.close-map(href="#" style="")
+        i.icon.arrow.left
+
+      //- Clean Jeju Logo
+      img(src="/img/logo_white.png")
+
+      //- Marker anchor for map
+      a(href="#" style="visibility: hidden;")
+        i.icon.marker
     +map

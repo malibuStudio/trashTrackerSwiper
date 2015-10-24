@@ -310,14 +310,14 @@ Template.page.events
   'touchend .goto-map': (e)->
     e.preventDefault()
 
-    $('.map-container').css('display', 'block')
+    $('.map-container').css('top', 0)
 
     TweenMax.to '.map-container', 0.5,
       opacity: 1
       onComplete: ->
         $('.map-container').css('pointer-events', 'auto')
 
-  'touchend .map-container': (e)->
+  'touchend .close-map': (e)->
     e.preventDefault()
 
     TweenMax.to '.map-container', 0.5,
@@ -325,7 +325,7 @@ Template.page.events
       onComplete: ->
         $('.map-container').css
           'pointer-events': 'none'
-          'display': 'none'
+          'top': -9999999
 
 Template.page.onRendered ->
   $('.bottom-bar textarea').autosize()

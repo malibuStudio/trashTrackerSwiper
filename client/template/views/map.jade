@@ -1,6 +1,7 @@
 template(name="map")
-  #map
-  .map-container
-    ul
-      +each trashes
-        li {{properties.name}}
+  .map-wrapper
+    #map
+    .map-list
+      ul
+        +each trashes
+          li {{properties.name}}
