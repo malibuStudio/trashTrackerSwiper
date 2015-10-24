@@ -1,75 +1,94 @@
 template(name="page")
-    .app-header
-      a(style="visibility:hidden;")
+  // ==================================================
+  //  APP MAIN PAGE
+  //  List of Trashes
+  // ==================================================
+  //- App Header Main Page
+  .app-header
+    //- Fake hidden anchor for alignment
+    a(style="visibility:hidden;")
+      i.icon.add
+
+    //- Clean Jeju Logo
+    img(src="/img/logo_white.png")
+
+    //- + icon upload photo
+    #upload-photo
+      if currentUser
+        input(type="file")
+      button.btn.btn-primary
         i.icon.add
-      img(src="/img/logo_white.png")
-      #upload-photo
-        if currentUser
-          input(type="file")
-        button.btn.btn-primary
-          i.icon.add
-    .page-container
-      // UI Components (Menu)
-      //-
-        .page-ui-components#ui-wrapper
-          #upload-photo
-            if currentUser
-              input(type="file")
-            button.btn.btn-primary 쓰레기 제보하기
 
-      +each Trashes
-        .page-item
-          .page-header.followMeBar
-            .left
-              span.avatar
-              span.username {{createdUserName}}
-            .right
-              span.date {{moFromNow createdAt withoutSuffix}}
+  .page-container
+    //- Each Posts (Trashes)
+    +each Trashes
+      .page-item
+        .page-header.followMeBar
+          .left
+            span.avatar
+            span.username {{createdUserName}}
+          .right
+            span.date {{moFromNow createdAt withoutSuffix}}
 
-          .page-body
-            .img-wrapper
-              img(src="{{imageUrl}}")
+        .page-body
+          //- Image Wrapper
+          .img-wrapper
+            img(src="{{imageUrl}}")
 
-            .body-inner
-              .list-actions
-                a(href="" data-action="show-comment" data-target="{{_id}}")
-                  i.ion-ios-chatboxes-outline
-              .contents
-                span.description {{description}}
-          //-
-            .page-comments(data-scroll-speed="3")
-              .comment-submit
-                //- textarea(rows="3")
-                //- button.btn-primary.btn-comment-submit
-                  i.icon.plus
-              +each comments
-                h1  {{description}}
-
-    .page-comments
-      .app-header
-        a.goto-list
-          i.icon.arrow.left
-        h3 쓰레기 연대기
-        a(style="visibility: hidden;")
-          i.icon.arrow.left
-      ul.comments
-        +each comments
-          li
-            .meta
-              .profile
-              .username
-                | {{createdUserName}}
-            .desc
-              | {{description}}
+          //- Below Photo
+          .body-inner
+            //- Action Bar
+            .list-actions
+              a(href="" data-action="show-comment" data-target="{{_id}}")
+                i.ion-chatboxes
+              a(href="" data-action="show-map" data-target="{{_id}}")
+                i.ion-map
+            .contents
+              span.description {{description}}
 
 
-      .bottom-bar
-        textarea.comment-text
-        button.comment-submit
-          i.icon.add
-        .upload-comment-photo
-          input#upload-comment-photo(type="file")
-          button.comment-photo
-            i.icon.camera
+
+  // ==================================================
+  //  COMMENTS PAGE
+  //  List of Comments
+  // ==================================================
+  .page-comments
+    //- App Header Comments Page
+    .app-header
+      //- Goes back to main page
+      a.goto-list
+        i.icon.arrow.left
+
+      //- Comments Title
+      h3 쓰레기 연대기
+
+      //- Fake hidden anchor for alignment
+      a(style="visibility: hidden;")
+        i.icon.arrow.left
+
+    ul.comments
+      +each comments
+        li
+          .profile
+          .group
+            .username
+              | {{createdUserName}}
+              span {{moFromNow createdAt withoutSuffix}}
+            if description
+              .desc
+                | {{description}}
+            if imageUrl
+              .comment-img
+                img(src="{{imageUrl}}")
+
+    .bottom-bar
+      textarea.comment-text
+      button.comment-submit
+        i.icon.add
+
+
+      button.comment-photo
+        input#upload-comment-photo(type="file")
+        i.icon.camera
 
 

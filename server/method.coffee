@@ -16,6 +16,9 @@ Meteor.methods
     object.description = comment.description if comment.description
     object.imageUrl = comment.imageUrl if comment.imageUrl
     object.geometry = comment.geometry if comment.geometry
+
+    console.log object
+
     Trashes.update comment.parentId,
       $addToSet:
         comments: object

@@ -16,6 +16,32 @@
   transform: translate(0, 100%);
 }
 
+.upload-container .desc-overlay {
+  .stretch(fixed);
+  background: RGBA(0, 0, 0, 0.8);
+  z-index: 99999;
+  padding: 2rem;
+  padding-top: 4rem;
+  display: flex;
+  textarea {
+    flex: 1;
+    background: transparent;
+    color: white;
+    outline: 0;
+    border: 0;
+    box-shadow: none;
+  }
+  button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: black;
+    box-shadow: none;
+    border: 0;
+    color: white;
+  }
+}
+
 img.crop-target {
   opacity: 0;
 }
@@ -44,6 +70,7 @@ img.crop-target {
   text-align: center;
 }
 
-.btn-cropper-close {
+.btn-cropper-close,
+.btn-cropper-desc {
   border-radius: 0 !important;
 }

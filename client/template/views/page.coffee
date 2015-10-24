@@ -76,9 +76,69 @@ Template.page.events
         $('textarea.comment-text').val('')
 
   'change #upload-comment-photo': (e)->
-    e.preventDefault()
+    Session.set('commentPhotoUpload', true)
+    e = e.originalEvent
+    target = e.dataTransfer or e.target
+    file = target and target.files and target.files[0]
+    options =
+      canvas: true
+      maxWidth: 800
 
+    if not file
+      return
+    else
+      console.log 'File: ', file
+      # if file.size > 4194304
+      #   return false
 
+      # Use the "JavaScript Load Image" functionality to parse the file data
+      loadImage.parseMetaData file, (data) ->
+
+        # Get the correct orientation setting from the EXIF Data
+        if data.exif
+          options.orientation = data.exif.get('Orientation')
+          if data.exif.map
+            console.log 'Exif.map: ',data.exif.map
+          else
+            console.log 'Location Data does not Exist'
+
+        # Load the image from disk and inject it into the DOM with the correct orientation
+        loadImage file, ((canvas) ->
+          imgDataURL = canvas.toDataURL('img/jpg')
+
+          Session.set('currentImg', imgDataURL)
+
+          $('img.crop-target').attr(
+            'src': Session.get('currentImg')
+          )
+
+          $('.upload-container').css('display', 'block');
+          Meteor.setTimeout (->
+            TweenMax.to '.upload-container', 0.5,
+              opacity: 1
+              y: 0
+          ), 500
+
+          $('img.crop-target').imagesLoaded().done (instance)->
+            console.log 'Image Done'
+            Meteor.setTimeout (->
+              $('img.crop-target').cropper
+                aspectRatio: 1/1
+                guides: false
+                strict: true
+                dragCrop: false
+                cropBoxMovable: true
+                cropBoxResizable: true
+                responsive: true
+                mouseWheelZoom: true
+                built: ->
+                  TweenMax.to '.malibu-crop-wrapper', 0.5,
+                    opacity: 1
+                    onComplete: ->
+                      console.log 'Tween'
+            ), 1000
+
+        ), options
 
 
   # ========================================================
@@ -136,6 +196,7 @@ Template.page.events
       MODAL('modal-account')
 
   'change #upload-photo input': (e)->
+    Session.set('commentPhotoUpload', false)
     e.preventDefault
     e = e.originalEvent
     target = e.dataTransfer or e.target

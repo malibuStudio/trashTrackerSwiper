@@ -1,7 +1,14 @@
 template(name="upload")
+
   .upload-container
+    //- .desc-overlay
+      textarea.cropper-desc
+      button.btn.btn-cropper-desc-close
+        i.icon.close
     btn.btn.btn-primary.btn-cropper-close
       i.icon.remove
+    //- btn.btn.btn-primary.btn-cropper-desc
+      i.icon.font
     .cropper-outer
       img.crop-target
     btn.btn.btn-primary.btn-upload-cropped

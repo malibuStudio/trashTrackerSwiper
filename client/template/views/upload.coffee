@@ -7,8 +7,9 @@ Template.upload.events
       y: '100%'
       clearProps: 'all'
       onComplete: ->
-        $('.upload-container').css('display', 'none');
-        $('img.crop-target').cropper('destroy');
+        $('.upload-container').css('display', 'none')
+        $('img.crop-target').cropper('destroy')
+        Session.set('commentPhotoUpload', false)
 
 
 
@@ -23,18 +24,6 @@ Template.upload.events
 
     cropped = Session.get('croppedImg')
 
-    # DUMMY TEST
-    # dummyCoords =
-    #   coords:
-    #     longitude: 133
-    #     latitude: 32
-    # Meteor.call 'insertAnyLocation', dummyCoords, (err, res)->
-    #   if err
-    #     console.log err.reason
-    #     $('.btn-upload-cropped').removeClass('loading')
-    #   else
-    #     console.log res
-    #     $('.btn-upload-cropped').removeClass('loading')
 
     Cloudinary._upload_file cropped, {}, (err, res) ->
       if err
@@ -56,8 +45,24 @@ Template.upload.events
             timestamp: geoloc.timestamp
 
 
+        if Session.get('commentPhotoUpload') is true
+          obj =
+            parentId: Session.get('commentParentId')
+            imageUrl: res.url
+            # description: $.trim($('textarea.comment-text').val())
 
-        Meteor.call 'addTrash', obj, (err, res)->
+          Meteor.call 'addComment', obj, (err, res)->
+            if err
+              console.log ':( ', err.reason
+              $('.btn-upload-cropped').removeClass('loading')
+            else
+              console.log 'Yay!'
+              $('textarea.comment-text').val('')
+              Session.set('commentPhotoUpload', false)
+              $('.btn-upload-cropped').removeClass('loading')
+
+        else
+          Meteor.call 'addTrash', obj, (err, res)->
             if err
               console.log err.reason
               $('.btn-upload-cropped').removeClass('loading')
