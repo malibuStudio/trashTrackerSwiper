@@ -60,6 +60,12 @@ Template.upload.events
               $('textarea.comment-text').val('')
               Session.set('commentPhotoUpload', false)
               $('.btn-upload-cropped').removeClass('loading')
+              TweenMax.to '.upload-container', 0.5,
+                opacity: 0
+                y: '100%'
+                clearProps: 'all'
+                onComplete: ->
+                  $('.upload-container').css('display', 'none');
 
         else
           Meteor.call 'addTrash', obj, (err, res)->
