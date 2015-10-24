@@ -55,8 +55,10 @@ template(name="page")
       ul.comments
         +each comments
           li
-            .username
-              | {{createdUserName}}
+            .meta
+              .profile
+              .username
+                | {{createdUserName}}
             .desc
               | {{description}}
 
@@ -65,7 +67,9 @@ template(name="page")
         textarea.comment-text
         button.comment-submit
           i.icon.add
-        button.comment-photo
-          i.icon.camera
+        .upload-comment-photo
+          input#upload-comment-photo(type="file")
+          button.comment-photo
+            i.icon.camera
 
 

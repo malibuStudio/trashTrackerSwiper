@@ -188,9 +188,26 @@
       padding: 1rem 0.5rem;
       padding-bottom: 0;
       font-size: 0.8rem;
+      .meta {
+        display: flex;
+        align-items: center;
 
+      }
+      .profile {
+        display: block;
+        width: 1.2rem;
+        height: 1.2rem;
+        border-radius: 50%;
+        background: @brand-primary;
+        margin-right: 0.25rem;
+      }
+      .username {
+        font-size: 0.8rem;
+        // color: @brand-primary;
+      }
       .desc {
-        padding-bottom: 0.5rem;
+        padding-top: 0.5rem;
+        padding-bottom: 1rem;
         border-bottom: 1px solid RGBA(0, 0, 0, 0.08);
       }
     }
@@ -224,6 +241,23 @@
       border-radius: 0;
       border: 0;
       background: @brand-primary;
+    }
+    .upload-comment-photo {
+      position: relative;
+      display: block;
+      flex: 0 0 2rem;
+      height: auto;
+    }
+    input#upload-comment-photo {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+    }
+    button.comment-photo {
+      position: absolute;
     }
   }
 }

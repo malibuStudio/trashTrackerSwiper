@@ -75,6 +75,9 @@ Template.page.events
         console.log 'Yay!'
         $('textarea.comment-text').val('')
 
+  'change #upload-comment-photo': (e)->
+    e.preventDefault()
+
 
 
 
