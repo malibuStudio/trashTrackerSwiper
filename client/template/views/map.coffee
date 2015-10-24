@@ -107,4 +107,7 @@ Template.map.helpers
       fillOpacity: 0.7
     L.geoJson(jejuMap, style: style).addTo(@map)
 
-    jejuMap.features
+    jejuMap.features.sort (a,b)->
+      a.properties.density > b.properties.density and -1 or
+      a.properties.density is b.properties.density and 0 or
+      a.properties.density < b.properties.density and 1
