@@ -25,6 +25,9 @@
     label: "publicId"
   "geometry":
     type: Schemas.Coordinate
+  "lgtm":
+    type: Number
+    optional: true
   "createdAt":
     type: Date
     denyUpdate: true
@@ -58,6 +61,9 @@
     optional: true
   "comments.$.imageUrl":
     type: String
+    optional: true
+  "comments.$.lgtm":
+    type: Number
     optional: true
   "comments.$.geometry":
     type: SimpleSchema.Coordinate
