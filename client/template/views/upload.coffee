@@ -53,6 +53,11 @@ Template.upload.events
           obj =
             parentId: Session.get('commentParentId')
             imageUrl: res.url
+            geo:
+              coords:
+                longitude: geoloc.coords.longitude
+                latitude: geoloc.coords.latitude
+              timestamp: geoloc.timestamp
             # description: $.trim($('textarea.comment-text').val())
 
           Meteor.call 'addComment', obj, (err, res)->

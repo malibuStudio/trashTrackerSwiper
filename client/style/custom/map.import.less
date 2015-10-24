@@ -41,9 +41,9 @@
   }
 }
 
-//.leaflet-container {
-//  background: transparent !important;
-//}
+.leaflet-container {
+ background: #EEEEEE !important;
+}
 //
 //.leaflet-interactive {
 //  // stroke: darken(@brand-primary, 20%);
@@ -54,9 +54,26 @@
 //}
 
 #map {
+  position: relative;
   margin-top: 4rem;
   width: 100vw;
   height: 40vh !important;
+
+}
+
+.map-prevent-touch {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  // margin-top: 4rem;
+  height: 40vh;
+  width: 100vw;
+  // pointer-events: auto;
+  background: transparent;
+  // background: red;
+  z-index: 999;
+  opacity: 0.9;
 }
 
 .map-list {
