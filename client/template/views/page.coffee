@@ -10,6 +10,8 @@ Template.page.onCreated ->
     x: 0
     y: 0
 
+
+
 Template.page.helpers
   "Trashes": ->
     # t = Template.instance()
@@ -21,7 +23,9 @@ Template.page.helpers
       # sort:
         # createdAt: -1
   "comments": ->
-    Trashes.findOne(Session.get('commentParentId')).comments
+    trashId = Session.get('commentParentId')
+    if trashId?
+      Trashes.findOne(trashId).comments
   "gestures":
     'swiperight .page-container': (e, tmpl)->
       e.preventDefault()

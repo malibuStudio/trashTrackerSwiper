@@ -44,7 +44,7 @@ Template.upload.events
 
 
 
-        Meteor.call 'insertAnyLocation', obj, (err, res)->
+        Meteor.call 'addTrash', obj, (err, res)->
             if err
               console.log err.reason
               $('.btn-upload-cropped').removeClass('loading')

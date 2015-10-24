@@ -15,6 +15,7 @@
   "description":
     type: String
     label: "description"
+    optional: true
     max: 200
   "imageUrl":
     type: String

@@ -21,8 +21,9 @@ Meteor.methods
         "timestamp": obj.geo.timestamp
 
   'addTrash': (obj)->
+    console.log "addTrash", obj
     Trashes.insert
-      "description": obj.description or "Test 위치 insert"
+      "description": obj.description
       "imageUrl": obj.url
       "publicId": obj.publicId
       "geometry":
