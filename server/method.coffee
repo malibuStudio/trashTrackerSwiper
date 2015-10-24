@@ -30,6 +30,7 @@ Meteor.methods
         "type": "Point"
         "coordinates": [obj.geo.coords.longitude, obj.geo.coords.latitude]
         "timestamp": obj.geo.timestamp
+    , validate: false
 
   'addComment': (comment)->
     object = {}
@@ -39,4 +40,5 @@ Meteor.methods
     Trashes.update comment.parentId,
       $addToSet:
         comments: object
+    , validate: false
 

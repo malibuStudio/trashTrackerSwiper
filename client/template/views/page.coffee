@@ -20,8 +20,8 @@ Template.page.helpers
     Trashes.find {},
       # skip: idx - 1
       # limit: idx > 0 and 3 or 2
-      # sort:
-        # createdAt: -1
+      sort:
+        createdAt: -1
   "comments": ->
     trashId = Session.get('commentParentId')
     if trashId?
@@ -57,6 +57,20 @@ Template.page.events
         ease: Power4.easeOut
         onComplete: ->
           document.querySelector('.page-comments').classList.add 'view-comments'
+  'touchend .bottom-bar button.comment-submit': (e)->
+    e.preventDefault()
+
+    obj =
+      parentId: Session.get('commentParentId')
+      description: $.trim($('textarea.comment-text').val())
+
+    Meteor.call 'addComment', obj, (err, res)->
+      if err
+        console.log ':( ', err.reason
+      else
+        console.log 'Yay!'
+        $('textarea.comment-text').val('')
+
 
 
 
@@ -181,7 +195,7 @@ Template.page.events
 
 
 Template.page.onRendered ->
-
+  $('.bottom-bar textarea').autosize()
 
 
 

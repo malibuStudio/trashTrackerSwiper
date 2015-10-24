@@ -1,4 +1,17 @@
 Template.upload.events
+  'touchend .btn-cropper-close': (e)->
+    e.preventDefault()
+
+    TweenMax.to '.upload-container', 0.5,
+      opacity: 0
+      y: '100%'
+      clearProps: 'all'
+      onComplete: ->
+        $('.upload-container').css('display', 'none');
+        $('img.crop-target').cropper('destroy');
+
+
+
   'touchend .btn-upload-cropped': (e)->
     e.preventDefault()
 
@@ -56,5 +69,5 @@ Template.upload.events
                 y: '100%'
                 clearProps: 'all'
                 onComplete: ->
-                  $('.upload-container').style('display', 'none');
+                  $('.upload-container').css('display', 'none');
 

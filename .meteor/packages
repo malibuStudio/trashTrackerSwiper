@@ -91,6 +91,11 @@ iamkevingreen:imagesloaded        # Images Loaded (wait for image)
 lepozepo:cloudinary
 
 
+# =============================================================================
+# Textarea
+# =============================================================================
+
+copleykj:jquery-autosize
 
 # =============================================================================
 # Touchevent Packages

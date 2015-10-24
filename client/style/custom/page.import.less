@@ -178,9 +178,20 @@
   background: white;
   transform: translateX(100%);
   ul.comments {
+    margin: 0;
     margin-top: 7rem;
+    padding: 0;
     height: ~"calc(100vh - 4rem - 3rem)";
     overflow-y: scroll;
+    list-style: none;
+    li {
+      padding: 1rem 0.5rem;
+      font-size: 0.8rem;
+
+      .desc {
+        border-bottom: 1px solid RGBA(0, 0, 0, 0.08);
+      }
+    }
   }
 
   .bottom-bar {
@@ -189,9 +200,9 @@
     left: 0;
 
     width: 100vw;
-    height: 3rem;
+    // height: 3rem;
 
-    padding: 0.25rem;
+    padding: 0.5rem;
 
     background: RGBA(0, 0, 0, 0.1);
 
@@ -204,6 +215,7 @@
       resize: none;
       border: 0;
       margin-right: 0.25rem;
+      font-size: 0.9rem;
     }
     button {
       color: white;

@@ -22,9 +22,9 @@ template(name="page")
           .page-header.followMeBar
             .left
               span.avatar
-              span.username 김상유
+              span.username {{createdUserName}}
             .right
-              span.date 방금전
+              span.date {{moFromNow createdAt withoutSuffix}}
 
           .page-body
             .img-wrapper
@@ -54,72 +54,11 @@ template(name="page")
           i.icon.arrow.left
       ul.comments
         +each comments
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
-          li {{description}}
+          li
+            .username
+              | {{createdUserName}}
+            .desc
+              | {{description}}
 
 
       .bottom-bar
