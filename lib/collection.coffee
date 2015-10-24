@@ -25,6 +25,9 @@
     label: "publicId"
   "geometry":
     type: Schemas.Coordinate
+  "lgtm":
+    type: Number
+    optional: true
   "createdAt":
     type: Date
     denyUpdate: true
@@ -59,6 +62,9 @@
   "comments.$.imageUrl":
     type: String
     optional: true
+  "comments.$.lgtm":
+    type: Number
+    optional: true
   "comments.$.geometry":
     type: SimpleSchema.Coordinate
     optional: true
@@ -71,6 +77,10 @@
     autoValue: (doc)->
       # needs better practice
       Meteor.users.findOne(doc.comments and doc.comments[0].createdUserId or @userId).username
+  "comments.$.createdAt":
+    type: Date
+    autoValue: ->
+      @value and @value or new Date
 
 
 Trashes.attachSchema Schemas.Trashes
