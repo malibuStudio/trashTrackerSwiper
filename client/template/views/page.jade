@@ -5,9 +5,9 @@ template(name="page")
   // ==================================================
   //- App Header Main Page
   .app-header
-    //- Fake hidden anchor for alignment
-    a(style="visibility:hidden;")
-      i.icon.add
+    //- Marker anchor for map
+    a.goto-map(href="#" style="")
+      i.icon.marker
 
     //- Clean Jeju Logo
     img(src="/img/logo_white.png")
@@ -104,3 +104,5 @@ template(name="page")
           i.icon.camera
 
 
+  .map-container
+    +map

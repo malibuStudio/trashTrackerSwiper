@@ -303,6 +303,29 @@ Template.page.events
 
         ), options
 
+  # ========================================================
+  # MAPS
+  # -> Layout Control
+  # ========================================================
+  'touchend .goto-map': (e)->
+    e.preventDefault()
+
+    $('.map-container').css('display', 'block')
+
+    TweenMax.to '.map-container', 0.5,
+      opacity: 1
+      onComplete: ->
+        $('.map-container').css('pointer-events', 'auto')
+
+  'touchend .map-container': (e)->
+    e.preventDefault()
+
+    TweenMax.to '.map-container', 0.5,
+      opacity: 0
+      onComplete: ->
+        $('.map-container').css
+          'pointer-events': 'none'
+          'display': 'none'
 
 Template.page.onRendered ->
   $('.bottom-bar textarea').autosize()
