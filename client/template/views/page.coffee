@@ -197,8 +197,20 @@ Template.page.events
   'touchend [data-action=show-map]': (e, t)->
     e.preventDefault()
     target = "#dm-#{@_id}"
-    $(target).css('opacity', 1)
-
+    if $(target).css('opacity') is "1"
+      $(target).css('opacity', 0)
+    else
+      $(target).css('opacity', 1)
+      daumMap = new daum.maps.Map document.querySelector(target),
+        center: new daum.maps.LatLng @geometry.coordinates[1], @geometry.coordinates[0]
+        level: 6
+      daumMap.setDraggable false
+      daumMap.setZoomable false
+      marker = new daum.maps.Marker
+        map: daumMap
+        position: new daum.maps.LatLng @geometry.coordinates[1], @geometry.coordinates[0]
+  'touchend .daum-map': (e)->
+    $(e.currentTarget).css('opacity', 0)
 
   # ========================================================
   # Events
