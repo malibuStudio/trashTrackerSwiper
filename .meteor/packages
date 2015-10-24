@@ -57,7 +57,7 @@ bigu:device
 # =============================================================================
 
 semantic:ui-icon          # Semantic UI Icons
-
+pagebakers:ionicons
 
 # =============================================================================
 # Date Packages
@@ -106,3 +106,4 @@ chriswessels:hammer
 
 mdg:geolocation
 geojson-utils
+bevanhunt:leaflet

@@ -54,4 +54,7 @@ Template.upload.events
               TweenMax.to '.upload-container', 0.5,
                 opacity: 0
                 y: '100%'
+                clearProps: 'all'
+                onComplete: ->
+                  $('.upload-container').style('display', 'none');
 

@@ -1,26 +1,57 @@
 template(name="page")
-    //- +HammerTouchArea(gestureMap=gestures)
+    .app-header
+      a(style="visibility:hidden;")
+        i.icon.add
+      img(src="/img/logo_white.png")
+      #upload-photo
+        if currentUser
+          input(type="file")
+        button.btn.btn-primary
+          i.icon.add
     .page-container
       // UI Components (Menu)
-      .page-ui-components#ui-wrapper
-        #upload-photo
-          if currentUser
-            input(type="file")
-          button.btn.btn-primary 쓰레기 제보하기
+      //-
+        .page-ui-components#ui-wrapper
+          #upload-photo
+            if currentUser
+              input(type="file")
+            button.btn.btn-primary 쓰레기 제보하기
 
-      .page-wrapper
-        +each Trashes
-          .page-item
-            //- .page-inner
-            .page-main
-              .img-wrapper
-                img(src="{{imageUrl}}")
+      +each Trashes
+        .page-item
+          .page-header.followMeBar
+            .left
+              span.avatar
+              span.username 김상유
+            .right
+              span.date 방금전
+
+          .page-body
+            .img-wrapper
+              img(src="{{imageUrl}}")
+
+            .body-inner
+              .list-actions
+                a(href="" data-action="show-comment" data-target="{{_id}}")
+                  i.ion-ios-chatboxes-outline
+              .contents
+                span.description {{description}}
+          //-
             .page-comments(data-scroll-speed="3")
               .comment-submit
-                textarea(rows="3")
+                //- textarea(rows="3")
                 //- button.btn-primary.btn-comment-submit
                   i.icon.plus
-              h1  this is comment
-              h1  this is comment
-              h1  this is comment
-              h1  this is comment
+              +each comments
+                h1  {{description}}
+
+    .page-comments
+      .app-header
+        a.goto-list
+          i.icon.arrow.left
+        h3 쓰레기 연대기
+        a(style="visibility: hidden;")
+          i.icon.arrow.left
+      each comments
+
+

@@ -20,6 +20,8 @@ Template.page.helpers
       # limit: idx > 0 and 3 or 2
       # sort:
         # createdAt: -1
+  "comments": ->
+    Trashes.findOne(Session.get('commentParentId')).comments
   "gestures":
     'swiperight .page-container': (e, tmpl)->
       e.preventDefault()
@@ -30,6 +32,30 @@ Template.page.helpers
 
 
 Template.page.events
+  # ========================================================
+  # Comments
+  # -> Layout Control
+  # ========================================================
+  'touchend [data-action=show-comment], touchend .goto-list': (e)->
+    e.preventDefault()
+
+    if 'view-comments' in document.querySelector('.page-comments').classList
+      TweenMax.to '.page-comments', 0.3,
+        x: '100%'
+        ease: Power4.easeOut
+        clearProps: "all"
+        onComplete: ->
+          document.querySelector('.page-comments').classList.remove 'view-comments'
+    else
+      Session.set('commentParentId', @_id)
+      TweenMax.to '.page-comments', 0.3,
+        x: 0
+        ease: Power4.easeOut
+        onComplete: ->
+          document.querySelector('.page-comments').classList.add 'view-comments'
+
+
+
   # ========================================================
   # Events
   # -> Layout Control
@@ -121,12 +147,11 @@ Template.page.events
             'src': Session.get('currentImg')
           )
 
+          $('.upload-container').css('display', 'block');
           Meteor.setTimeout (->
-# $('.upload-container').removeClass('active')
             TweenMax.to '.upload-container', 0.5,
               opacity: 1
               y: 0
-# $('.crop-container').addClass('active')
           ), 500
 
           $('img.crop-target').imagesLoaded().done (instance)->
@@ -152,31 +177,7 @@ Template.page.events
 
 
 Template.page.onRendered ->
-  swiperOptions =
-    mode: 'horizontal'
-    createPagination: true
 
-  initSwiper = =>
-    if @$('.swiper-container .swiper-slide').length > 0
-      mySwiper = @$('.swiper-container').swiper(swiperOptions)
-      Meteor.setInterval (->
-        mySwiper.reInit
-        console.log 'Swiper Reinit'
-      ), 800
-
-      # Slide Scroll Vertical Effect
-      # Irrelevant to swiper
-      # $('.swiper-slide').on('scroll', ->
-      #   scrollPos = $('.swiper-slide-active').scrollTop()
-      #   scrollSpeed = parseInt($('.swiper-slide-active .page-comments').data('scroll-speed'))
-      #   elPos = scrollPos / scrollSpeed
-      #   $('.swiper-slide-active .page-comments').css('transform', 'translateY(-' + elPos + 'px)')
-      # )
-    else
-      Meteor.setTimeout initSwiper, 100
-
-
-  initSwiper()
 
 
 

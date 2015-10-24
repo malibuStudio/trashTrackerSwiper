@@ -19,6 +19,7 @@ Meteor.methods
         "type": "Point"
         "coordinates": [obj.geo.coords.longitude, obj.geo.coords.latitude]
         "timestamp": obj.geo.timestamp
+
   'addTrash': (obj)->
     Trashes.insert
       "description": obj.description or "Test 위치 insert"
@@ -28,3 +29,14 @@ Meteor.methods
         "type": "Point"
         "coordinates": [obj.geo.coords.longitude, obj.geo.coords.latitude]
         "timestamp": obj.geo.timestamp
+
+  'addComment': (comment)->
+    object = {}
+    object._id = Random.id()
+    object.description = comment.description if comment.description
+    object.imageUrl = comment.imageUrl if comment.imageUrl
+    object.geometry = comment.geometry if comment.geometry
+    Trashes.update comment.parentId,
+      $addToSet:
+        comments: object
+
