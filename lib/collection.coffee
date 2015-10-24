@@ -65,6 +65,9 @@
   "comments.$.lgtm":
     type: Number
     optional: true
+  "comments.$.lgtmUsers":
+    type: [String]
+    optional: true
   "comments.$.geometry":
     type: SimpleSchema.Coordinate
     optional: true
